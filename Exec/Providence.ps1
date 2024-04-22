@@ -15,9 +15,9 @@ $graphics.CopyFromScreen($left, $top, 0, 0, $bitmap.Size)
 $dateFolder = Get-Date -Format "yyyy-MM-dd"
 
 # ====
-# !!!Set the path correctly!!!
 
-$path = "C:\providence\SS_log\$dateFolder" 
+$baseOutput = Get-Content "output_path.txt" -Raw
+$path = "$baseOutput\$dateFolder" 
 
 # ====
 
