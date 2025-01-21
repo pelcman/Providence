@@ -11,19 +11,17 @@ $bitmap = New-Object System.Drawing.Bitmap $width, $height
 $graphics = [System.Drawing.Graphics]::FromImage($bitmap)
 $graphics.CopyFromScreen($left, $top, 0, 0, $bitmap.Size)
 
-# Set date folder path
+# Set date and computer name folder path
 $dateFolder = Get-Date -Format "yyyy-MM-dd"
+$computerName = $env:COMPUTERNAME
 
-# ====
-
+# ==== Read base output path from file ====
 $baseOutput = Get-Content "output_path.txt" -Raw
-$path = "$baseOutput\$dateFolder" 
+$path = "$baseOutput\$computerName\$dateFolder"
 
-# ====
-
-# If the folder does not exist, create it
+# ==== If the folder does not exist, create it ====
 if (-not (Test-Path -Path $path)) {
-    New-Item -Path $path -ItemType Directory
+    New-Item -Path $path -ItemType Directory -Force
 }
 
 # Set screenshot file name
